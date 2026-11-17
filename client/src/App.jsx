@@ -7,7 +7,6 @@ import Dashboard from './pages/Dashboard.jsx';
 import Inbox from './pages/Inbox.jsx';
 import Accounts from './pages/Accounts.jsx';
 import Portal from './pages/Portal.jsx';
-import Landing from './pages/Landing.jsx';
 import { EmptyState, ErrorState, Spinner } from './components/ui.jsx';
 import { Compass } from 'lucide-react';
 
@@ -35,7 +34,7 @@ function PublicOnly({ children }) {
 export default function App() {
   return (
     <Routes>
-      <Route path="/" element={<PublicOnly><Landing /></PublicOnly>} />
+      <Route path="/" element={<Navigate to="/app" replace />} />
       <Route path="/login" element={<PublicOnly><AuthPage mode="login" /></PublicOnly>} />
       <Route path="/signup" element={<PublicOnly><AuthPage mode="signup" /></PublicOnly>} />
       <Route path="/onboarding" element={<Protected onboarding><Onboarding /></Protected>} />
