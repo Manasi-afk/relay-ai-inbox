@@ -1,0 +1,453 @@
+/* =========================================================
+   Landing page — values copied from Figma "Copy as code → CSS".
+   Layer names in comments refer to the Figma file.
+
+   Each section is a full-width band holding a fixed-size Figma frame
+   (Desktop 1440 / Tablet 768 / Mobile 375, picked in Landing.jsx).
+   The frame is scaled with `zoom` to fit the viewport, so the design
+   widths render 1:1 and other widths show the nearest design, scaled.
+   ========================================================= */
+.lp {
+  --lp-font: 'Roboto Variable', Roboto, system-ui, sans-serif;
+  --lp-ink: #000000;
+  --lp-blue: #4356D6;          /* buttons, icons, accent words */
+  --lp-card-bg: #FAFBFF;       /* Frame 1154 background */
+  --lp-card-line: #E2E7FF;     /* Frame 1154 border */
+  --lp-hover: #051AA3;         /* card hover border + title (measured from the Hover Effect frame) */
+
+  min-height: 100%;
+  background: #FFFFFF;
+  font-family: var(--lp-font);
+  color: var(--lp-ink);
+}
+.lp *, .lp *::before, .lp *::after { box-sizing: border-box; }
+.lp-accent { color: var(--lp-blue); }
+
+.lp-band { width: 100%; overflow: hidden; }
+.lp-band--hero { background: linear-gradient(261.18deg, #FAFBFF -0.46%, #FAFBFF 100.67%); } /* HeroSection2 */
+.lp-frame { position: relative; margin: 0 auto; zoom: var(--lp-zoom, 1); }
+
+/* Text styles (Figma: Des. H2 Heading / Des. Large Title / Des. Body Regular) */
+.lp-h2 { font-weight: 600; font-size: 48px; line-height: 70px; text-transform: capitalize; }
+.lp-title { font-weight: 600; font-size: 24px; line-height: 32px; text-transform: capitalize; }
+.lp-body { font-weight: 400; font-size: 18px; line-height: 32px; text-transform: capitalize; }
+.lp-title-sm { font-weight: 500; font-size: 20px; line-height: 23px; text-transform: capitalize; color: #000000; } /* Des. Title */
+
+/* =========================== Hero (Hero Section1) =========================== */
+.lp-hero { isolation: isolate; width: 1440px; height: 829px; }
+/* Ellipse 8 */
+.lp-hero__glow {
+  position: absolute;
+  width: 974px;
+  height: 974px;
+  left: -368px;
+  top: 212px;
+  border-radius: 50%;
+  background: #F5F6FA;
+  filter: blur(125px);
+}
+
+/* Navbar (Frame 33 > Frame 32) */
+.lp-nav {
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 100px;
+  gap: 70px;
+}
+/* Frame 1152 */
+.lp-logo { display: flex; flex: none; flex-direction: row; align-items: center; gap: 16px; width: 158.71px; height: 58px; }
+.lp-logo img { width: 45.71px; height: 50px; }
+.lp-logo span { font-weight: 700; font-size: 43px; line-height: 50px; color: #000000; }
+/* Frame 1212 */
+.lp-nav__links { display: flex; flex-direction: row; align-items: center; gap: 26px; width: 630px; height: 41px; margin: 0; padding: 0; list-style: none; }
+.lp-nav__links a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 41px;
+  padding: 10px;
+  font-weight: 500;          /* Des. Body Medium */
+  font-size: 18px;
+  line-height: 21px;
+  text-transform: capitalize;
+  color: #282828;
+  white-space: nowrap;
+}
+.lp-nav__links a[aria-current="page"] { color: var(--lp-blue); }
+.lp-nav__end { display: flex; flex: none; flex-direction: row; align-items: center; gap: 24px; } /* Frame 1216 */
+/* ic:twotone-menu */
+.lp-menu { display: block; flex: none; width: 34px; height: 34px; padding: 0; border: 0; background: none; }
+.lp-menu svg { display: block; width: 100%; height: 100%; }
+
+/* Buttons */
+.lp-btn {
+  display: inline-flex;
+  flex: none;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  height: 46px;
+  padding: 14px 22px;
+  border: 0;
+  border-radius: 8px;
+  font: 500 18px/21px var(--lp-font);   /* Des. Body Medium */
+  text-transform: capitalize;
+  white-space: nowrap;
+  cursor: pointer;
+}
+/* Figma strokes sit inside the box without taking layout space, so borders are
+   drawn as inset shadows (a CSS border would shrink the content box and shift the label). */
+.lp-btn--solid { background: var(--lp-blue); box-shadow: inset 0 0 0 1px var(--lp-blue); color: #FFFFFF; }
+.lp-btn--outline { background: transparent; box-shadow: inset 0 0 0 2px var(--lp-blue); color: var(--lp-blue); }
+/* Hover Effect frame: solid ↔ outline swap (2px #4356D6 outline / #4356D6 fill) */
+.lp-btn--solid:hover { background: transparent; box-shadow: inset 0 0 0 2px var(--lp-blue); color: var(--lp-blue); }
+.lp-btn--outline:hover { background: var(--lp-blue); box-shadow: inset 0 0 0 1px var(--lp-blue); color: #FFFFFF; }
+/* Buttons/solar:phone-linear — drawn in the text colour so it follows the hover state */
+.lp-btn__icon {
+  flex: none;
+  width: 26px;
+  height: 26px;
+  background: currentColor;
+  -webkit-mask: url("/landing/hero-phone.svg") center / 100% 100% no-repeat;
+          mask: url("/landing/hero-phone.svg") center / 100% 100% no-repeat;
+}
+/* 18px/21px labels render 1px higher in Chrome than in Figma (measured against the render) */
+.lp-label { position: relative; top: 1px; }
+/* Figma centres a label's fixed-width text box (width from the layer CSS), with the
+   glyphs left-aligned inside it; set that width so glyphs land where Figma puts them. */
+.lp-label[style] { display: inline-block; flex: none; text-align: left; }
+.lp-btn--contact { width: 169px; }
+
+/* Frame 249 (copy column) */
+.lp-hero__copy {
+  position: absolute;
+  left: 72px;
+  top: 180px;
+  width: 606px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 26px;
+}
+/* Group 15 */
+.lp-hero__title { position: relative; flex: none; width: 620px; height: 255px; }
+.lp-h1 {
+  position: absolute;
+  left: 0;
+  top: -1px;                 /* 64px Roboto sits 1px lower in Chrome than in Figma (measured) */
+  width: 620px;
+  height: 255px;
+  font-weight: 700;          /* Des. H1 Heading */
+  font-size: 64px;
+  line-height: 85px;
+  text-transform: capitalize;
+  color: #000000;
+}
+/* Underline Vector, box from the SVG export (the layer is rotated -176.44°) */
+.lp-hero__underline { position: absolute; left: 0.203px; top: 164.632px; width: 349.26px; height: 13.848px; }
+.lp-hero__copy > .lp-body { align-self: stretch; }
+
+/* Frame 1151 */
+.lp-checks { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.lp-checks li { display: flex; flex-direction: row; align-items: center; gap: 16px; height: 32px; }
+.lp-checks img { flex: none; width: 24px; height: 24px; }
+/* Frame 32 */
+.lp-hero__ctas { display: flex; flex-direction: row; align-items: center; gap: 24px; }
+.lp-hero__ctas .lp-btn { width: 213px; }
+
+/* Group 21 / Banner Image */
+.lp-hero__banner { position: absolute; left: 677.87px; top: 156px; width: 739.13px; height: 607px; }
+
+/* Frame 240 — "Trusted By 250+ Professionals" */
+.lp-stat {
+  position: absolute;
+  left: 730px;
+  top: 509px;
+  width: 255px;
+  height: 121px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 30px 20px;
+  background: #FFFFFF;
+  border-radius: 10px;
+}
+.lp-stat__icon {
+  flex: none;
+  width: 80px;
+  height: 80px;
+  transform: translateY(-0.5px);  /* Figma draws it at y=529.5; layout would snap it to 530 */
+  background: #5254CF;
+  -webkit-mask: url("/landing/hero-briefcase.png") center / 100% 100% no-repeat;
+          mask: url("/landing/hero-briefcase.png") center / 100% 100% no-repeat;
+}
+.lp-stat__text { flex: none; width: 123px; display: flex; flex-direction: column; align-items: flex-start; gap: 1px; }
+.lp-stat__num { font-weight: 800; font-size: 40px; line-height: 47px; text-transform: capitalize; color: var(--lp-blue); }
+
+/* Frame 239 — "4.8 Clients Rating" */
+.lp-rating {
+  position: absolute;
+  left: 1036px;
+  top: 392px;
+  width: 252px;
+  height: 105px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 20px 15px;
+  background: rgba(255, 255, 255, 0.79);
+  -webkit-backdrop-filter: blur(45.5px);
+          backdrop-filter: blur(45.5px);
+  border-radius: 10px;
+}
+.lp-rating__num {
+  flex: none;
+  width: 63px;
+  font-family: 'Inter Variable', Inter, sans-serif;
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 48px;
+  color: var(--lp-blue);
+}
+.lp-rating__text { flex: none; width: 125px; display: flex; flex-direction: column; align-items: flex-start; gap: 11px; }
+.lp-stars { display: flex; flex-direction: row; align-items: center; gap: 4px; height: 16.35px; }
+.lp-stars img { width: 17.12px; height: 16.35px; }
+
+/* ================== Why Compliance Matters (Frame 1162) ================== */
+.lp-why {
+  isolation: isolate;
+  width: 1440px;
+  padding: 50px 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  background: #FFFFFF;
+}
+/* Frame 1159 */
+.lp-why__inner { position: relative; z-index: 0; width: 100%; display: flex; flex-direction: column; align-items: flex-start; gap: 36px; }
+/* Frame 1153 */
+.lp-why__head { align-self: stretch; display: flex; flex-direction: row; align-items: center; gap: 33px; }
+.lp-why__head > * { flex: 1 1 0; min-width: 0; }
+.lp-why__head .lp-h2 { display: flex; align-items: center; min-height: 140px; }
+/* -1px: Roboto Variable's vertical metrics put 48px text ~1px lower than Figma's Roboto (measured) */
+.lp-why__head .lp-h2 > span { display: block; position: relative; top: -1px; }
+
+/* Frame 1158 */
+.lp-why__body { position: relative; z-index: 1; align-self: stretch; display: flex; flex-direction: row; align-items: center; gap: 52px; }
+/* Group 12 (illustration, 594 × 594) */
+.lp-why__art { position: relative; flex: 1 1 0; min-width: 0; aspect-ratio: 1 / 1; max-width: 594px; }
+.lp-why__art img { display: block; width: 100%; height: 100%; }
+
+/* Frame 1157 (card list) */
+.lp-why__cards { flex: 1 1 0; min-width: 0; align-self: stretch; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; gap: 40px; }
+/* Frame 1154 / 1157 / 1158 (card); 1px stroke drawn inside the box like Figma */
+.lp-card {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 11px;
+  padding: 20px;
+  background: var(--lp-card-bg);
+  box-shadow: inset 0 0 0 1px var(--lp-card-line);
+  border-radius: 8px;
+}
+/* Hover Effect frame: border + title #051AA3. (Its drop shadow is not added yet: needs the layer's CSS.) */
+.lp-card:hover { box-shadow: inset 0 0 0 1px var(--lp-hover); }
+.lp-card:hover .lp-title { color: var(--lp-hover); }
+/* Frame 1162 (card row) */
+.lp-card__row { align-self: stretch; display: flex; flex-direction: row; align-items: flex-start; gap: 26px; }
+/* Mask group: PNG used as a mask over a #4356D6 rectangle */
+.lp-icon {
+  flex: none;
+  width: 36px;
+  height: 36px;
+  background: var(--lp-blue);
+  -webkit-mask: var(--icon) center / contain no-repeat;
+          mask: var(--icon) center / contain no-repeat;
+}
+/* Frame 1164 */
+.lp-card__text { flex: 1 1 0; min-width: 0; height: 102px; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; gap: 11px; }
+.lp-card__text .lp-body { align-self: stretch; height: 59px; }
+
+/* path20605 (curved arrow) — box measured from the Figma render (layer CSS gives pre-rotation size) */
+.lp-why__squiggle { position: absolute; z-index: 2; left: 599.5px; top: 141.5px; width: 34.5px; height: 128.5px; pointer-events: none; }
+/* Group (chevrons, bottom-left) */
+.lp-why__chevrons { position: absolute; z-index: 1; left: 0; top: 803px; width: 137.33px; height: 34.17px; }
+
+/* =============================== Tablet 768 =============================== */
+.lp--t .lp-hero { width: 768px; height: 1328px; }
+/* Frame 35 > Frame 32: logo, fixed 347px gap, Contact Us + menu */
+.lp--t .lp-nav { justify-content: flex-start; padding: 0 20px; gap: 347px; }
+
+/* Frame 1214 > Frame 249 (centred column) */
+.lp--t .lp-hero__copy { left: 66px; top: 149px; width: 636px; align-items: center; }
+.lp--t .lp-hero__title { width: 603.89px; height: 150px; }
+.lp--t .lp-h1 { width: 588px; height: 150px; font-size: 54px; line-height: 75px; text-align: center; } /* Ta. H1 Heading */
+.lp--t .lp-hero__underline { left: 293.445px; top: 66.5px; width: 309px; height: 12.5px; }   /* measured from the render */
+.lp--t .lp-hero__copy > .lp-body { align-self: auto; width: 588px; text-align: center; }
+.lp--t .lp-checks { width: 466px; }
+
+/* Group 21 (banner scaled to 636 × 522.3) and Group 13 cards — Frame 1214 coords + (66, 149) */
+.lp--t .lp-hero__banner { left: 66px; top: 643px; width: 636px; height: 522.3px; }
+.lp--t .lp-stat { left: 111px; top: 947px; width: 263px; height: 104px; }
+.lp--t .lp-stat__icon { transform: none; }
+.lp--t .lp-rating { left: 374.16px; top: 846.07px; width: 238px; height: 90.35px; }
+
+.lp--t .lp-why { width: 768px; padding: 50px 20px; }
+/* Frame 1220 */
+.lp--t .lp-why__inner { align-items: center; gap: 20px; }
+/* Frame 1219 */
+.lp--t .lp-why__head { align-self: auto; width: 603.5px; flex-direction: column; align-items: stretch; gap: 26px; }
+.lp--t .lp-why__head > * { flex: none; }
+.lp--t .lp-why__head .lp-h2 { min-height: 120px; justify-content: center; text-align: center; font-size: 46px; line-height: 60px; } /* Ta. H2 Heading */
+.lp--t .lp-why__head .lp-body { text-align: center; }
+.lp--t .lp-why__body { flex-direction: column; align-items: center; gap: 20px; }
+/* Group 12 box (613.23 × 594); the art strip spans the frame from the paragraph to the first card */
+.lp--t .lp-why__art { flex: none; width: 613.23px; height: 594px; max-width: none; aspect-ratio: auto; }
+.lp--t .lp-why__art img { position: absolute; left: -77.38px; top: -20px; width: 768px; height: 678px; }
+.lp--t .lp-why__cards { flex: none; align-self: stretch; height: 594px; }
+
+/* =============================== Mobile 375 =============================== */
+.lp--m .lp-band--hero { background: #FFFFFF; }
+.lp--m .lp-hero { width: 375px; height: 1063px; }
+.lp--m .lp-hero__glow { display: none; }
+/* Frame 582/581: #FAFBFF block from y=55; it overlaps the navbar's bottom 9px as in Figma */
+.lp--m .lp-hero::before { content: ''; position: absolute; z-index: 2; left: 0; top: 55px; width: 375px; height: 1008px; background: #FAFBFF; }
+.lp--m .lp-hero > :not(.lp-nav):not(.lp-hero__glow) { z-index: 3; }
+/* Frame 580 (navbar) */
+.lp--m .lp-nav { top: 10px; height: 54px; padding: 10px 16px; gap: 0; background: #FFFFFF; box-shadow: 0 0 6px rgba(0, 0, 0, 0.11); }
+.lp--m .lp-logo { width: 122px; height: 34px; gap: 10px; }
+.lp--m .lp-logo img { width: 30.29px; height: 33.13px; }
+.lp--m .lp-logo span { font-size: 33px; line-height: 39px; }
+.lp--m .lp-menu { width: 24px; height: 24px; }
+
+/* Frame 1202 */
+.lp--m .lp-hero__copy { left: 16px; top: 55px; width: 343px; padding-top: 26px; align-items: center; }
+.lp--m .lp-hero__title { width: 343px; height: 144px; }
+.lp--m .lp-h1 { width: 343px; height: 144px; font-size: 38px; line-height: 48px; text-align: center; } /* Mo. H1 Heading */
+.lp--m .lp-hero__underline { left: 51.5px; top: 93px; width: 183px; height: 11.5px; }   /* measured from the render */
+.lp--m .lp-hero__copy > .lp-body { text-align: center; }
+.lp--m .lp-checks { width: 315px; }
+.lp--m .lp-checks li:nth-child(3) { height: 64px; align-items: flex-start; }
+.lp--m .lp-checks li:nth-child(3) .lp-body { width: 275px; }
+.lp--m .lp-hero__ctas { flex-direction: column; align-items: stretch; gap: 16px; width: 343px; }
+.lp--m .lp-hero__ctas .lp-btn { width: 343px; }
+
+/* Group 15: OBJECTS (350 × 255.13) + chevrons (85 × 21.15) */
+.lp--m .lp-hero__banner { left: 12.5px; top: 788px; width: 350px; height: 255.13px; }
+.lp--m .lp-hero__chevrons { position: absolute; left: 25.5px; top: 747px; width: 85px; height: 21.15px; }
+/* Frame 241 */
+.lp--m .lp-stat { left: 40px; top: 935px; width: 165px; height: 80px; padding: 4px; gap: 6px; }
+.lp--m .lp-stat__icon { width: 34px; height: 34px; transform: none; }
+.lp--m .lp-stat__text { width: 117px; }
+.lp--m .lp-title-sm { font-size: 19px; line-height: 22px; }      /* Mo. Title */
+.lp--m .lp-stat__num { font-size: 22px; line-height: 26px; }
+/* Frame 1206 */
+.lp--m .lp-rating { left: 181px; top: 861px; width: 176px; height: 60px; padding: 6px; gap: 10px; }
+.lp--m .lp-rating__num { width: 35px; font-size: 22px; line-height: 27px; }
+.lp--m .lp-rating__text { width: 119px; }
+.lp--m .lp-stars { height: 15px; }
+.lp--m .lp-stars img { width: 15px; height: 15px; }
+
+/* Frame 1159 (50px below the hero block, 36px white at the end of the frame) */
+.lp--m .lp-why { width: 375px; padding: 50px 16px 36px; }
+.lp--m .lp-why__head { flex-direction: column; align-items: stretch; gap: 26px; }
+.lp--m .lp-why__head > * { flex: none; }
+.lp--m .lp-why__head .lp-h2 { min-height: 144px; justify-content: center; text-align: center; font-size: 34px; line-height: 48px; } /* Mo. H2 Heading */
+.lp--m .lp-why__head .lp-body { text-align: center; }
+/* Frame 1158 */
+.lp--m .lp-why__body { flex-direction: column; align-items: stretch; gap: 26px; }
+.lp--m .lp-why__art { flex: none; width: 343px; height: 343px; max-width: none; aspect-ratio: auto; }
+.lp--m .lp-why__art img { position: absolute; left: -16px; top: -36px; width: 375px; height: 405px; }
+/* Frame 1157 */
+.lp--m .lp-why__cards { flex: none; height: 615px; gap: 26px; }
+.lp--m .lp-card__row { flex: 1 1 auto; }
+.lp--m .lp-card--1 { height: 177px; }
+.lp--m .lp-card--1 .lp-card__text { height: 137px; justify-content: flex-start; }
+.lp--m .lp-card--1 .lp-title { font-size: 22px; }                 /* Mo. Large Title */
+.lp--m .lp-card--1 .lp-body { height: 107px; }
+.lp--m .lp-card--2 { height: 204px; }
+.lp--m .lp-card--2 .lp-card__text { height: 164px; justify-content: flex-start; }
+.lp--m .lp-card--2 .lp-title { align-self: stretch; height: 61px; }
+.lp--m .lp-card--2 .lp-body { height: auto; flex: 1 1 0; }
+.lp--m .lp-card--3 { height: 182px; }
+
+/* ---- Sub-pixel corrections measured against the Figma renders (2x pixel comparison) ----
+   Roboto Variable's vertical metrics differ slightly from Figma's Roboto, and Figma keeps
+   fractional positions that the browser rounds. Values below make each element land where
+   Figma draws it. */
+.lp--t .lp-h1, .lp--m .lp-h1 { top: 0; }                       /* 54px / 38px: no offset needed */
+.lp--t .lp-why__head .lp-h2 > span { top: 0; }                  /* 46px */
+.lp--m .lp-why__head .lp-h2 > span { top: 1px; }                /* 34px */
+.lp--t .lp-hero__underline { left: 292.945px; top: 66px; }
+.lp--t .lp-stat__text { transform: translateY(-0.5px); }        /* centred overflow lands on .5 in Figma */
+.lp--t .lp-rating > * { transform: translateY(0.5px); }
+.lp--m .lp-logo span { transform: translateY(-0.5px); }          /* Figma trims this text box to cap height */
+.lp--m .lp-card--1 .lp-title { position: relative; top: 1px; }   /* 22px Mo. Large Title */
+
+/* Hover Effect card: 1px #051AA3 border + 0 4px 8px rgba(0,0,0,.1) */
+.lp-card:hover { box-shadow: inset 0 0 0 1px var(--lp-hover), 0 4px 8px rgba(0, 0, 0, 0.1); }
+
+/* =================== Navbar Tablet / Mobile Menu (Frame 584) =================== */
+.lp-drawer-layer { position: fixed; inset: 0; z-index: 50; }
+.lp-overlay { position: absolute; inset: 0; background: rgba(0, 0, 0, 0.7); }   /* Frame 585 */
+.lp-drawer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  zoom: var(--lp-zoom, 1);
+  width: 475px;                                   /* tablet; mobile below */
+  min-height: 717px;
+  height: calc(100dvh / var(--lp-zoom, 1));       /* drawer background runs to the bottom of the screen */
+  overflow-y: auto;
+  background: #FAFBFF;
+}
+.lp--m .lp-drawer { width: 327px; }
+/* Frame 580 / 578 */
+.lp-drawer__head { display: flex; flex-direction: row; justify-content: space-between; align-items: center; height: 54px; padding: 10px 16px; background: #FAFBFF; }
+.lp-drawer .lp-logo { width: 122px; height: 34px; gap: 10px; }
+.lp-drawer .lp-logo img { width: 30.29px; height: 33.13px; }
+.lp-drawer .lp-logo span { font-size: 33px; line-height: 39px; transform: translateY(-0.5px); }
+.lp-drawer__close { display: block; flex: none; width: 32px; height: 32px; padding: 0; border: 0; background: none; cursor: pointer; }
+.lp-drawer__close svg { display: block; width: 100%; height: 100%; }
+/* Frame 581 > Frame 579 */
+.lp-drawer__body { display: flex; flex-direction: column; align-items: flex-start; gap: 36px; width: 314px; padding: 50px 16px 0; }
+/* Frame 251: 172px rows stacked with 40px gaps */
+.lp-dlinks { display: flex; flex-direction: column; align-items: flex-start; gap: 40px; margin: 0; padding: 0; list-style: none; }
+.lp-dlinks a {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 24px;
+  height: 44px;
+  padding: 10px;
+  font: 500 18px/21px var(--lp-font);   /* Ta./Mo. Body Medium */
+  text-transform: capitalize;
+  color: #282828;
+  white-space: nowrap;
+}
+.lp-dlinks a.is-current { color: var(--lp-blue); }
+.lp-dlinks__icon { flex: none; width: 24px; height: 24px; color: #000000; }
+.lp-dlinks a.is-current .lp-dlinks__icon { color: var(--lp-blue); }
+/* responsible / price-tag / help / notebook-of-contacts (Mask group over a #000 rectangle) */
+.lp-dlinks__icon--png {
+  background: currentColor;
+  -webkit-mask: var(--icon) center / 100% 100% no-repeat;
+          mask: var(--icon) center / 100% 100% no-repeat;
+}
+.lp-drawer__cta { width: 282px; }
